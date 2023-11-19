@@ -1,35 +1,33 @@
 #include "Light.hpp"
 
-std::string const Light::getMsg(){
-	std::string msg;
-	if(mState == GREEN){
-		msg = "Go";
-	}else{
-		msg = "Stop";
+namespace comminterface{
+	Light::Light()
+	{
+		mRouter = MsgRouter::GetInstance();
+		mLightChange = mRouter->getTopic("LightChange");
 	}
-	return msg;
-}
 
-void Light::setMsg(std::string aMsg){
-	if(aMsg == "Green"){
-		mState = GREEN;
-	}else{
+	std::string const Light::getState(){
+		std::string msg;
+		if(mState == GREEN){
+			msg = "Go";
+		}else{
+			msg = "Stop";
+		}
+		return msg;
+	}
+
+	void Light::redEvent(){
 		mState = RED;
+		mLightChange->publish("Stop");
 	}
-	update();
-}
 
-void Light::redEvent(){
-	mState = RED;
-	comm->setMsg("Stop");
-}
+	void Light::greenEvent(){
+		mState = GREEN;
+		mLightChange->publish("Drive");
+	}
 
-void Light::greenEvent(){
-	mState = GREEN;
-	comm->setMsg("Drive");
-}
-
-void Light::update(){
+	void Light::update(){
 	switch (mState)
 	{
 	case GREEN:
@@ -41,4 +39,5 @@ void Light::update(){
 	default:
 		break;
 	}
+}
 }

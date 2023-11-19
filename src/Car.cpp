@@ -1,42 +1,42 @@
 #include "Car.hpp"
-
-std::string const Car::getMsg(){
-	std::string msg;
-	if(mState == DRIVE){
-		msg = "Drive";
-	}else{
-		msg = "Stop";
-	}
-	return msg;
-}
-
-void Car::setMsg(std::string aMsg){
-	if(aMsg == "Drive"){
-		mState = DRIVE;
-	}else{
-		mState = STOP;
-	}
-	update();
-}
-
-void Car::goEvent(){
-	mState = DRIVE;
-}
-
-void Car::stopEvent(){
-	mState = STOP;
-}
-
-void Car::update(){
-	switch (mState)
+namespace comminterface
+{
+	Car::Car()
 	{
-	case DRIVE:
-		goEvent();
-		break;
-	case STOP:
-		stopEvent();
-		break;
-	default:
-		break;
+		mRouter = MsgRouter::GetInstance();
+		mLightChange = mRouter->getTopic("LightChange");
+		mLightChange->subscribe(this);
+	}
+
+	std::string const Car::getState(){
+		std::string msg;
+		if(mState == DRIVE){
+			msg = "Drive";
+		}else{
+			msg = "Stop";
+		}
+		return msg;
+	}
+
+	void Car::update()
+	{
+		std::string state = mLightChange->receive();
+
+		if(state == "Stop")
+		{
+			stopEvent();
+		}
+		else
+		{
+			goEvent();
+		}
+	}
+
+	void Car::goEvent(){
+		mState = DRIVE;
+	}
+
+	void Car::stopEvent(){
+		mState = STOP;
 	}
 }

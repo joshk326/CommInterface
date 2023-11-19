@@ -1,20 +1,24 @@
 #ifndef LIGHT_HPP
 #define LIGHT_HPP
-#include "Observer.hpp"
+#include "MsgRouter.hpp"
 
-class Light : public Observer{
-	public:
-		enum States{
-			RED = 0,
-			GREEN = 1
-		};
-		Observer *comm;
-		std::string const getMsg();
-		void setMsg(std::string aMsg);
-		void update();
-	private:
-		States mState;
-		void redEvent();
-		void greenEvent();
-};
+namespace comminterface
+{
+	class Light{
+		public:
+			enum States{
+				RED = 0,
+				GREEN = 1
+			};
+			Light();
+			std::string const getState();
+			void update();
+			void redEvent();
+			void greenEvent();
+		private:
+			MsgRouter* mRouter;
+			Topic* mLightChange;
+			States mState;
+	};
+}
 #endif

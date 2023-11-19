@@ -4,17 +4,14 @@
 #include "Light.hpp"
 
 int main(){
-	Car testCar;
-	Light testLight;
-
-	testCar.comm = &testLight;
-	testLight.comm = &testCar;
+	comminterface::Car testCar;
+	comminterface::Light testLight;
 	
-	testLight.setMsg("Green");
-	std::cout << "Lights Current State: " << testLight.getMsg() << "\n";
-	std::cout << "Cars Current State: " << testCar.getMsg() << "\n";
+	testLight.greenEvent();
+	std::cout << "Lights Current State: " << testLight.getState() << "\n";
+	std::cout << "Cars Current State: " << testCar.getState() << "\n";
 
-	testLight.setMsg("Red");
-	std::cout << "Lights Current State: " << testLight.getMsg() << "\n";
-	std::cout << "Cars Current State: " << testCar.getMsg() << "\n";	
+	testLight.redEvent();
+	std::cout << "Lights Current State: " << testLight.getState() << "\n";
+	std::cout << "Cars Current State: " << testCar.getState() << "\n";	
 }

@@ -10,7 +10,7 @@ cd build
 cmake ..
 
 :: Build the project
-cmake --build . --config Release
+cmake --build .
 
 :: Optionally, you can run the executable
 :: .\release\MyExecutable
