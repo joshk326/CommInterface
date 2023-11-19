@@ -8,7 +8,7 @@ namespace comminterface
 
 		for(int i = 0; i < mSubscriberList.size(); i++)
 		{
-			mSubscriberList[i]->update();
+			mSubscriberList[i]->update(aMsg);
 		}
 	}
 
@@ -26,10 +26,5 @@ namespace comminterface
 		{
 			mSubscriberList.erase(std::remove(mSubscriberList.begin(), mSubscriberList.end(), aSubscriber), mSubscriberList.end());
 		}
-	}
-
-	std::string Topic::receive()
-	{
-		return mCurrMsg;
 	}
 }

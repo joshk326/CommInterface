@@ -18,11 +18,9 @@ namespace comminterface
 		return msg;
 	}
 
-	void Car::update()
+	void Car::update(std::string aState)
 	{
-		std::string state = mLightChange->receive();
-
-		if(state == "Red")
+		if(aState == "Red")
 		{
 			stopEvent();
 		}

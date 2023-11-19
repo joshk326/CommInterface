@@ -18,7 +18,7 @@ namespace comminterface
 			MsgRouter* mRouter;
 			Topic* mLightChange;
 			States mState;
-			void update();
+			void update(std::string aState);
 			void goEvent();
 			void stopEvent();
 	};

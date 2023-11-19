@@ -16,7 +16,6 @@ namespace comminterface
 			void subscribe(Subscriber* aSubscriber);
 			void unsubscribe(Subscriber* aSubscriber);
 			void publish(std::string aMsg);
-			std::string receive();
 		private:
 			std::string mTopicName;
 			std::string mCurrMsg;

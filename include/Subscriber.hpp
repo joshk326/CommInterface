@@ -6,7 +6,7 @@ namespace comminterface
 	class Subscriber
 	{
 		public:
-		virtual void update() = 0;
+		virtual void update(std::string aState) = 0;
 	};
 }
 
