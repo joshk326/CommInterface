@@ -6,9 +6,10 @@ namespace comminterface
 	{
 		mCurrMsg = aMsg;
 
-		for (Subscriber* subscriber : mSubscriberList) {
-            subscriber->update();
-        }
+		for(int i = 0; i < mSubscriberList.size(); i++)
+		{
+			mSubscriberList[i]->update();
+		}
 	}
 
 	void Topic::subscribe(Subscriber* aSubscriber)
@@ -21,9 +22,10 @@ namespace comminterface
 
 	void Topic::unsubscribe(Subscriber* aSubscriber)
 	{
-		mSubscriberList.erase(std::remove_if(mSubscriberList.begin(), mSubscriberList.end(),
-			[aSubscriber](const Subscriber* s) { return s == aSubscriber; }),
-			mSubscriberList.end());
+		if (aSubscriber)
+		{
+			mSubscriberList.erase(std::remove(mSubscriberList.begin(), mSubscriberList.end(), aSubscriber), mSubscriberList.end());
+		}
 	}
 
 	std::string Topic::receive()

@@ -7,7 +7,7 @@ cmake_minimum_required(VERSION 3.12)
 project(ObjComm)
 
 # Set variables
-set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD 98)
 set(SRC_DIR src)
 
 # Specify include directories
