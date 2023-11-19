@@ -10,21 +10,21 @@ namespace comminterface{
 	std::string const Light::getState(){
 		std::string msg;
 		if(mState == GREEN){
-			msg = "Go";
+			msg = "Green";
 		}else{
-			msg = "Stop";
+			msg = "Red";
 		}
 		return msg;
 	}
 
 	void Light::redEvent(){
 		mState = RED;
-		mLightChange->publish("Stop");
+		mLightChange->publish("Red");
 	}
 
 	void Light::greenEvent(){
 		mState = GREEN;
-		mLightChange->publish("Drive");
+		mLightChange->publish("Green");
 	}
 
 	void Light::update(){

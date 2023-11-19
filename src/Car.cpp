@@ -22,7 +22,7 @@ namespace comminterface
 	{
 		std::string state = mLightChange->receive();
 
-		if(state == "Stop")
+		if(state == "Red")
 		{
 			stopEvent();
 		}
