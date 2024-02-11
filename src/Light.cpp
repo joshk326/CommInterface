@@ -1,12 +1,25 @@
 #include "Light.hpp"
 
-namespace comminterface{
+namespace comminterface
+{
 	Light::Light()
+	{
+		// Initialize the light
+		init();
+	}
+
+	void Light::init()
 	{
 		mLightChange = MsgRouter::getInstance().getTopic("LightChange");
 	}
 
-	std::string const Light::getState(){
+	void Light::finalize()
+	{
+		// Nothing to finalize
+	}
+
+	std::string const Light::getState()
+	{
 		std::string msg;
 		if(mState == GREEN){
 			msg = "Green";
@@ -16,27 +29,30 @@ namespace comminterface{
 		return msg;
 	}
 
-	void Light::redEvent(){
+	void Light::redEvent()
+	{
 		mState = RED;
 		mLightChange->publish("Red");
 	}
 
-	void Light::greenEvent(){
+	void Light::greenEvent()
+	{
 		mState = GREEN;
 		mLightChange->publish("Green");
 	}
 
-	void Light::update(){
-	switch (mState)
+	void Light::update()
 	{
-	case GREEN:
-		greenEvent();
-		break;
-	case RED:
-		redEvent();
-		break;
-	default:
-		break;
+		switch (mState)
+		{
+			case GREEN:
+				greenEvent();
+				break;
+			case RED:
+				redEvent();
+				break;
+			default:
+				break;
+		}
 	}
-}
 }

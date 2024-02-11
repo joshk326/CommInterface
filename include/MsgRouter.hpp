@@ -3,6 +3,7 @@
 
 #include <cstddef>
 #include <map>
+#include <iostream>
 
 #include "Topic.hpp"
 
@@ -13,13 +14,12 @@ namespace comminterface
 		public:
 			static MsgRouter& getInstance();
 			Topic* getTopic(std::string aTopicName);
+			void deleteTopic(std::string aTopicName);
 		private:
 			MsgRouter(MsgRouter const&);
 			void operator=(MsgRouter const&);
 			std::map<std::string, Topic*> mTopicMap;
 			MsgRouter() {}
-			Topic* createTopic(std::string aTopicName);
-
 	};
 }
 

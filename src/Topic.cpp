@@ -4,27 +4,32 @@ namespace comminterface
 {
 	void Topic::publish(std::string aMsg)
 	{
-		mCurrMsg = aMsg;
-
-		for(int i = 0; i < mSubscriberList.size(); i++)
+		const std::list<ISubscriber*>::const_iterator end = mSubscriberList.end();
+		for (std::list<ISubscriber*>::iterator curr = mSubscriberList.begin();
+			 curr != end;
+			 ++curr)
 		{
-			mSubscriberList[i]->update(aMsg);
+			(*curr)->update(aMsg);
 		}
 	}
 
-	void Topic::subscribe(Subscriber* aSubscriber)
+	void Topic::subscribe(ISubscriber* aSubscriber)
 	{
-		if(aSubscriber)
+		// See if subcriber does not exist in the list
+		bool found = std::find(mSubscriberList.begin(), mSubscriberList.end(), aSubscriber) != mSubscriberList.end();
+		if (aSubscriber != NULL && !found)
 		{
 			mSubscriberList.push_back(aSubscriber);
 		}
 	}
 
-	void Topic::unsubscribe(Subscriber* aSubscriber)
+	void Topic::unsubscribe(ISubscriber* aSubscriber)
 	{
-		if (aSubscriber)
+		// See if subscriber exists in the list
+		bool found = std::find(mSubscriberList.begin(), mSubscriberList.end(), aSubscriber) != mSubscriberList.end();
+		if (aSubscriber != NULL && found)
 		{
-			mSubscriberList.erase(std::remove(mSubscriberList.begin(), mSubscriberList.end(), aSubscriber), mSubscriberList.end());
+			mSubscriberList.remove(aSubscriber);
 		}
 	}
 }

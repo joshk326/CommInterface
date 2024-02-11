@@ -2,10 +2,10 @@
 #define TOPIC_HPP
 
 #include <string>
-#include <vector>
+#include <list>
 #include <algorithm>
 
-#include "Subscriber.hpp"
+#include "ISubscriber.hpp"
 
 namespace comminterface
 {
@@ -13,13 +13,12 @@ namespace comminterface
 	{
 		public:
 			Topic(std::string aTopicName): mTopicName(aTopicName){}
-			void subscribe(Subscriber* aSubscriber);
-			void unsubscribe(Subscriber* aSubscriber);
+			void subscribe(ISubscriber* aSubscriber);
+			void unsubscribe(ISubscriber* aSubscriber);
 			void publish(std::string aMsg);
 		private:
 			std::string mTopicName;
-			std::string mCurrMsg;
-			std::vector<Subscriber*> mSubscriberList;
+			std::list<ISubscriber*> mSubscriberList;
 	};
 }
 #endif
