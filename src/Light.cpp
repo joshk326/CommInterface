@@ -3,8 +3,7 @@
 namespace comminterface{
 	Light::Light()
 	{
-		mRouter = MsgRouter::GetInstance();
-		mLightChange = mRouter->getTopic("LightChange");
+		mLightChange = MsgRouter::getInstance().getTopic("LightChange");
 	}
 
 	std::string const Light::getState(){

@@ -16,7 +16,6 @@ namespace comminterface
 			void redEvent();
 			void greenEvent();
 		private:
-			MsgRouter* mRouter;
 			Topic* mLightChange;
 			States mState;
 	};

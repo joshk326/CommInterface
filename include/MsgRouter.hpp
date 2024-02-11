@@ -11,10 +11,11 @@ namespace comminterface
 	class MsgRouter
 	{
 		public:
-			static MsgRouter* GetInstance();
+			static MsgRouter& getInstance();
 			Topic* getTopic(std::string aTopicName);
 		private:
-			static MsgRouter* mInstance;
+			MsgRouter(MsgRouter const&);
+			void operator=(MsgRouter const&);
 			std::map<std::string, Topic*> mTopicMap;
 			MsgRouter() {}
 			Topic* createTopic(std::string aTopicName);

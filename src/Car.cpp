@@ -3,8 +3,7 @@ namespace comminterface
 {
 	Car::Car()
 	{
-		mRouter = MsgRouter::GetInstance();
-		mLightChange = mRouter->getTopic("LightChange");
+		mLightChange = MsgRouter::getInstance().getTopic("LightChange");
 		mLightChange->subscribe(this);
 	}
 

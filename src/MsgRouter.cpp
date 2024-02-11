@@ -1,24 +1,16 @@
 #include "MsgRouter.hpp"
 
 namespace comminterface
-{
-	MsgRouter* MsgRouter::mInstance = NULL;
-	
-	MsgRouter* MsgRouter::GetInstance()
+{	
+	MsgRouter& MsgRouter::getInstance()
 	{
-		if(mInstance == NULL)
-		{
-			mInstance = new MsgRouter();
-		}
-
-		return mInstance;
+		static MsgRouter instance;
+		return instance;
 	}
 
 	Topic* MsgRouter::createTopic(std::string aTopicName)
-	{
-		Topic* returnTopic = NULL;
-		
-		returnTopic = new Topic(aTopicName);
+	{		
+		Topic* returnTopic = new Topic(aTopicName);
 		mTopicMap.insert(std::make_pair(aTopicName, returnTopic));
 
 		return returnTopic;
@@ -38,4 +30,5 @@ namespace comminterface
 
 		return returnTopic;
 	}
+
 }

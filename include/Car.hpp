@@ -15,7 +15,6 @@ namespace comminterface
 			Car();
 			std::string const getState();
 		private:
-			MsgRouter* mRouter;
 			Topic* mLightChange;
 			States mState;
 			void update(std::string aState);
